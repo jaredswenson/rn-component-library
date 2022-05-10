@@ -1,27 +1,39 @@
 {
   "name": "rn-component-library",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "lib/commonjs/index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook",
+    "prepare": "bob build"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ]
   },
   "dependencies": {
+    "@expo-google-fonts/nunito": "^0.2.2",
+    "@expo-google-fonts/roboto": "^0.2.2",
     "@expo/vector-icons": "^12.0.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "@rollup/plugin-typescript": "^8.3.2",
     "expo": "~44.0.0",
     "expo-asset": "~8.4.4",
     "expo-constants": "~13.0.0",
     "expo-font": "~10.0.4",
+    "expo-linear-gradient": "^11.0.3",
     "expo-linking": "~3.0.0",
     "expo-splash-screen": "~0.14.0",
     "expo-status-bar": "~1.2.0",
@@ -31,16 +43,50 @@
     "react-native": "0.64.3",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "rollup": "^2.70.2",
+    "rollup-plugin-dts": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@react-native-community/bob": "^0.17.1",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.25",
+    "@storybook/react-native": "^5.3.25",
+    "@storybook/react-native-server": "^5.3.23",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
-    "jest-expo": "~44.0.1",
+    "babel-loader": "^8.2.4",
     "jest": "^26.6.3",
+    "jest-expo": "~44.0.1",
     "react-test-renderer": "17.0.1",
     "typescript": "~4.3.5"
   },
-  "private": true
+  "private": true,
+  "react-native": "components/index.ts",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/components/index.d.ts",
+  "files": [
+    "components",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "@react-native-community/bob": {
+    "source": "components",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
